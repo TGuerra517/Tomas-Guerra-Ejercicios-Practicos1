@@ -40,6 +40,8 @@ public class EjerciciosPracticos : MonoBehaviour
     int posicionArray = 0;
     int[] numerosPares = new int[5];
     int enemigosDerrotados = 0;
+    float energiaEscudo = 100;
+    bool escudoActivo = true;
 
 
 
@@ -675,41 +677,79 @@ El resultado final debería ser:
 
 
 
+    /*  void Update()
+      {
+          if (!ProgramaTerminado)
+          {
+              tiempo += Time.deltaTime;  // El motor de tiempo acumula fracciones de segundo cuadro por cuadro
+
+              if (tiempo >= 1)  // Cada vez que pasa 1 segundo real
+              {
+                  segundos++; // Avanzamos el segundo (1, 2, 3...)
+                  tiempo = 0; // Reiniciamos el cronómetro
+
+
+              }
+
+              if (segundos % 2 == 0) // Condición 1: ¿Es un segundo par?
+              {
+                  numerosPares[posicionArray] = segundos; // Guardamos el número en el array
+                  posicionArray++;                        // Pasamos al siguiente espacio
+              }
+
+              // Condición 2: ¿Ya llegamos al límite de 10 segundos?
+              if (segundos >= 10)
+              {
+                  ProgramaTerminado = true; // Cerramos el candado para congelar el Update
+
+                  // Recorremos el array final con un bucle for
+                  for (int i = 0; i < numerosPares.Length; i++)
+                  {
+                      // Condición 3: Mostrar solamente los valores mayores a 5
+                      if (numerosPares[i] > 5)
+                      {
+                          Debug.Log(numerosPares[i]); // Imprime: 6, luego 8, luego 10
+                      }
+                  }
+              }
+          }
+    */
+
+
+    /*El Escudo de Energía
+Conceptos a repasar: float, bool, if, Update(), Time.deltaTime.
+• Objetivo: Crea un script donde un personaje tenga un escudo de energía dinámico.
+• Instrucciones:
+1. Declara una variable float llamada energiaEscudo que empiece en 100.0f.
+2. Declara una variable bool llamada escudoActivo que empiece en true.
+3. En el método Update(), si el escudo está activo (true), debes reducir la energía constantemente a un ritmo de 5.0f unidades por segundo real usando Time.deltaTime.
+4. Añade una condición if: si la energía llega a 0 o menos, el escudo debe apagarse (escudoActivo = false) y debes mostrar un mensaje en consola que diga "¡Escudo desactivado!".
+
+*/
+
+
     void Update()
     {
-        if (!ProgramaTerminado)
+        if (escudoActivo)
         {
-            tiempo += Time.deltaTime;  // El motor de tiempo acumula fracciones de segundo cuadro por cuadro
+            energiaEscudo -= 5f * Time.deltaTime;
+          
 
-            if (tiempo >= 1)  // Cada vez que pasa 1 segundo real
+            if (energiaEscudo <= 0)
             {
-                segundos++; // Avanzamos el segundo (1, 2, 3...)
-                tiempo = 0; // Reiniciamos el cronómetro
-
-
+                escudoActivo=false;
+                energiaEscudo = 0;
+                Debug.Log("Energia Agotada");
             }
+           
 
-            if (segundos % 2 == 0) // Condición 1: ¿Es un segundo par?
-            {
-                numerosPares[posicionArray] = segundos; // Guardamos el número en el array
-                posicionArray++;                        // Pasamos al siguiente espacio
-            }
 
-            // Condición 2: ¿Ya llegamos al límite de 10 segundos?
-            if (segundos >= 10)
-            {
-                ProgramaTerminado = true; // Cerramos el candado para congelar el Update
 
-                // Recorremos el array final con un bucle for
-                for (int i = 0; i < numerosPares.Length; i++)
-                {
-                    // Condición 3: Mostrar solamente los valores mayores a 5
-                    if (numerosPares[i] > 5)
-                    {
-                        Debug.Log(numerosPares[i]); // Imprime: 6, luego 8, luego 10
-                    }
-                }
-            }
+
+
+
+
+
         }
 
 
@@ -718,9 +758,11 @@ El resultado final debería ser:
 
 
 
+    }
 
-    }
-    }
+
+}
+
 
 
 
